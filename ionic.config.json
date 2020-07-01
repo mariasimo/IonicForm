@@ -1,0 +1,7 @@
+{
+  "name": "Nutritec",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

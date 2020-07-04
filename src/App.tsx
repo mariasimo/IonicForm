@@ -17,6 +17,7 @@ import {
   IonDatetime,
   IonList,
   IonListHeader,
+  IonInput,
 } from '@ionic/react';
 
 
@@ -116,31 +117,37 @@ const App: React.FC = () => {
 
    const initHour = '09:00';
    const [timesheets, setTimesheet] = useState<string[]>([initHour]);
+   const [removeSlot, setRemoveSlot] = useState<number | null>(null);
    const maxSize = 24;
 
    const addSlotToTimesheet = () => {
+      console.log(timesheets)
       if (timesheets.length < maxSize) {
          setTimesheet([...timesheets, initHour]);
       }
    };
    
    const saveHourInTimesheet = (value: string, idx: number) => {
-      console.log(value, timesheets[idx])
-      if(value === timesheets[idx]) return
+      if(removeSlot) return
+      console.log(value)
+      // console.log(value, timesheets[idx])
+      // if(value === timesheets[idx]) return
       console.log('save fn was called')
 
       const newTimesheets = [...timesheets].map((el, elIdx) => elIdx === idx ? value : el)
       setTimesheet([...newTimesheets])
 
+      setRemoveSlot(null)
    };
 
-
-
-   const removeSlotFromTimesheet = (idx: number) => {
-      const newTimesheets = [...timesheets]
-      newTimesheets.splice(idx, 1)
-      setTimesheet(newTimesheets)
-   };
+   useEffect(() =>{
+      if(typeof removeSlot === "number") {
+         const newTimesheets = [...timesheets]
+         newTimesheets.splice(removeSlot, 1)
+         setTimesheet(newTimesheets)
+         setRemoveSlot(null)
+      } 
+   }, [removeSlot, timesheets])
 
    useEffect(() => console.log(timesheets), [timesheets])
 
@@ -218,16 +225,19 @@ const App: React.FC = () => {
                         {timesheets.map((slot, idx) => (
                           <IonItem key={idx} class='ion-no-padding'>
                             <IonLabel>
-                              <h3>Hora {idx}</h3>
+                        <h3>Hora</h3>
                             </IonLabel>
                             <IonDatetime
                               displayFormat='HH:mm'
                               value={slot}
-                              onIonChange={(e: CustomEvent)=>saveHourInTimesheet(slot, idx)}
+                              placeholder={slot}
+                              cancelText="Cancelar"
+                              doneText="Confirmar"
+                              onIonChange={(e: CustomEvent)=> saveHourInTimesheet(e.detail.value, idx)}
                             />
 
                             <IonButton fill='outline' slot='end'
-                              onClick={() => removeSlotFromTimesheet(idx)}
+                              onClick={()=>setRemoveSlot(idx)}
                             >
                               Borrar
                             </IonButton>
@@ -253,9 +263,9 @@ const App: React.FC = () => {
                 <IonCol>
                   <IonList>
                      <IonListHeader class='ion-no-padding'>
-                          <IonLabel>
-                              Iniciar tras el programa:
-                           </IonLabel>
+                        <IonLabel>
+                           Iniciar tras el programa...
+                        </IonLabel>
                      </IonListHeader>
                      <IonItem class="ion-no-padding">
                      <IonLabel position="floating">Elige un programa </IonLabel>
@@ -281,6 +291,83 @@ const App: React.FC = () => {
                   </IonList>
                 </IonCol>
               )}
+
+
+               {/* External activation configuration */}
+               {selectedStartMode.id === 3 && (
+                <IonCol>
+                  <IonList>
+                     <IonListHeader class='ion-no-padding  ion-margin-bottom'>
+                        <IonLabel>
+                           Configuración adicional
+                        </IonLabel>
+                     </IonListHeader>
+                     
+                     <IonLabel>
+                        Radiación solar mínima
+                        <p>Por debajo de este valor, el programa no se iniciará</p>
+                     </IonLabel>
+
+                     <IonItem class="ion-no-padding  ion-margin-bottom">
+                        <IonInput 
+                           type="number" 
+                           inputMode="numeric"
+                           max="2000"
+                           min="0"
+                           name="minRadiation"
+                           placeholder="2000"
+                           required
+                        ></IonInput>
+                        <IonLabel>
+                           <p>w/m2</p>
+                        </IonLabel>
+                     </IonItem>
+
+                     <IonLabel>
+                        Inicio
+                        <p>Tiempo desde la activación del riego hasta que se inicia</p>
+                     </IonLabel>
+
+                     <IonItem class="ion-no-padding ion-margin-bottom">
+                        <IonInput 
+                           type="number" 
+                           inputMode="numeric"
+                           max="999"
+                           min="0"
+                           name="minRadiation"
+                           placeholder="000"
+                           required
+                        ></IonInput>
+
+                        <IonLabel>
+                           <p>seg.</p>
+                        </IonLabel>
+                     </IonItem>
+
+                     <IonLabel>
+                        Pausa
+                        <p>Tiempo entre riegos si la activación sigue vigente</p>
+                     </IonLabel>
+
+                     <IonItem class="ion-no-padding  ion-margin-bottom">
+                        <IonInput 
+                           type="number" 
+                           inputMode="numeric"
+                           max="999"
+                           min="0"
+                           name="minRadiation"
+                           placeholder="000"
+                           required
+                        ></IonInput>
+                        <IonLabel>
+                        <p>seg.</p>
+                        </IonLabel>
+                     </IonItem>
+
+                  </IonList>
+                </IonCol>
+              )}
+
             </IonRow>
           )}
 

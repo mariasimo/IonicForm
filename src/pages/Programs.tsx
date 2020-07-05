@@ -11,10 +11,14 @@ import {
   IonButton,
   IonCardContent,
   IonCardSubtitle,
-  IonText,
   IonGrid,
-  IonRow
+  IonRow,
+  IonIcon,
+  IonItem,
+  IonLabel
 } from '@ionic/react';
+
+import { addOutline } from 'ionicons/icons'
 
 import { CREATED_PROGRAMS, INSTALLATION_CONFIG, STARTMODES, IStartMode } from '../data/dummy-data';
 
@@ -67,6 +71,13 @@ const NewProgram: React.FC = () => {
             </IonCardContent>
           </IonCard>
         ))}
+
+        <IonCard class="ion-no-margin" button={true} href='/nuevo-programa'>
+            <IonItem color="primary" >
+            <IonIcon icon={addOutline} slot="start" />
+            <IonLabel>Crear nuevo programa</IonLabel>
+          </IonItem>
+        </IonCard>
       </IonContent>
     </IonPage>
   );

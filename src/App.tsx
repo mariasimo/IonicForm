@@ -40,7 +40,7 @@ const App: React.FC = () => (
     <IonApp>
       <IonReactRouter>
           <Route path="/nuevo-programa"><NewProgram/></Route>
-          <Route path="/"><Programs/></Route>
+          <Route path="/" exact><Programs/></Route>
       </IonReactRouter>
       {/* <IonContent class='ion-padding'>
          <StartModeManager/>

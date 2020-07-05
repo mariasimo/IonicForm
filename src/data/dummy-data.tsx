@@ -20,11 +20,7 @@ export const CREATED_PROGRAMS = [
     title: 'Programa test',
     startmode: 42,
   },
-  {
-    id: 5,
-    title: 'Titulo programa',
-    startmode: 82,
-  },
+
 ];
 
 interface InstallConfig {

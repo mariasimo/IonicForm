@@ -15,7 +15,9 @@ import {
   IonRow,
   IonIcon,
   IonItem,
-  IonLabel
+  IonLabel,
+  IonButtons,
+  IonBackButton
 } from '@ionic/react';
 
 import { addOutline } from 'ionicons/icons'
@@ -39,6 +41,9 @@ const NewProgram: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar color='primary'>
+          <IonButtons slot="start">
+            <IonBackButton/>
+          </IonButtons>
           <IonTitle>Nutritec</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -72,7 +77,7 @@ const NewProgram: React.FC = () => {
           </IonCard>
         ))}
 
-        <IonCard class="ion-no-margin" button={true} href='/nuevo-programa'>
+        <IonCard class="ion-no-margin" button={true} routerLink='/nuevo-programa'>
             <IonItem color="primary" >
             <IonIcon icon={addOutline} slot="start" />
             <IonLabel>Crear nuevo programa</IonLabel>

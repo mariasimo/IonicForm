@@ -8,7 +8,7 @@ import {
   IonListHeader,
 } from '@ionic/react';
 
-import { INSTALLATION_CONFIG }from '../../data/dummy-data'
+import { INSTALLATION_CONFIG }from '../../../../data/dummy-data'
 const humidityNumber = INSTALLATION_CONFIG.humidity_sensors
 
 const HumidityActMode: React.FC = () => {

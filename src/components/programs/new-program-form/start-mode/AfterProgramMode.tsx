@@ -8,7 +8,7 @@ import {
   IonList,
   IonListHeader,
 } from '@ionic/react';
-import { CREATED_PROGRAMS }from '../../data/dummy-data'
+import { CREATED_PROGRAMS }from '../../../../data/dummy-data'
 
 
 const AfterProgramMode: React.FC  = () => {

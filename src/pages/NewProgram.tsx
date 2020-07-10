@@ -7,22 +7,9 @@ import {
   IonTitle,
   IonButtons,
   IonBackButton,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonButton,
   IonText,
   IonItem,
-  IonList,
-  IonListHeader,
-  IonLabel,
-  IonInput,
-  IonTextarea,
-  IonDatetime,
-  IonGrid,
-  IonRow,
-  IonCol
+  IonList
 } from '@ionic/react';
 
 const NewProgram: React.FC = () => {
